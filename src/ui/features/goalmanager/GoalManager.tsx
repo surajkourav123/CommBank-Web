@@ -6,6 +6,7 @@ import 'date-fns'
 import React, { useEffect, useState } from 'react'
 import { BaseEmoji } from 'emoji-mart'
 import { Goal } from '../../../api/types'
+import { updateGoal as updateGoalApi } from '../../../api/lib'
 import styled from 'styled-components'
 import { selectGoalsMap, updateGoal as updateGoalRedux } from '../../../store/goalsSlice'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
@@ -66,7 +67,7 @@ export function GoalManager(props: Props) {
     }
 
     dispatch(updateGoalRedux(updatedGoal))
-    // TODO(TASK-3) Update database
+    updateGoalApi(props.goal.id, updatedGoal)
   }
 
   const updateNameOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +81,7 @@ export function GoalManager(props: Props) {
       targetAmount: targetAmount ?? props.goal.targetAmount,
     }
     dispatch(updateGoalRedux(updatedGoal))
-    // TODO(TASK-3) Update database
+    updateGoalApi(props.goal.id, updatedGoal)
   }
 
   const updateTargetAmountOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +95,7 @@ export function GoalManager(props: Props) {
       targetAmount: nextTargetAmount,
     }
     dispatch(updateGoalRedux(updatedGoal))
-    // TODO(TASK-3) Update database
+    updateGoalApi(props.goal.id, updatedGoal)
   }
 
   const pickDateOnChange = (date: MaterialUiPickersDate) => {
@@ -108,7 +109,7 @@ export function GoalManager(props: Props) {
         targetAmount: targetAmount ?? props.goal.targetAmount,
       }
       dispatch(updateGoalRedux(updatedGoal))
-      // TODO(TASK-3) Update database
+      updateGoalApi(props.goal.id, updatedGoal)
     }
   }
 
